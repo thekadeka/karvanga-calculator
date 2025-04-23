@@ -1,6 +1,6 @@
 // Operation functions
 function add(a, b) {
-  return a + b;
+  console.log(a + b);
 }
 
 function subtract(a, b) {
@@ -20,11 +20,16 @@ let firstNumber = 0;
 let operator = '';
 let secondNumber = 0;
 
-function operate() {}
+function operate(firstNumber, operator, secondNumber) {
+  if (operator === '+') {
+    add(firstNumber, secondNumber);
+  }
+}
 
 function populate(firstNumber, operator, secondNumber) {
   const operators = document.querySelectorAll('.operator');
   const numbers = document.querySelectorAll('.number');
+  const equals = document.querySelector('#equals');
   let shouldClearDisplay = false;
   let firstNumberAcquired = false;
 
@@ -51,11 +56,16 @@ function populate(firstNumber, operator, secondNumber) {
             shouldClearDisplay = false;
           }
           display.textContent += e.target.textContent;
-          secondNumber = display.textContent;
-          console.log(secondNumber);
         });
       });
     });
+  });
+
+  equals.addEventListener('click', function () {
+    secondNumber = display.textContent;
+    console.log(secondNumber);
+    console.log(operator);
+    operate(firstNumber, operator, secondNumber);
   });
 }
 
