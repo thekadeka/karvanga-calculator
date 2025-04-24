@@ -15,6 +15,7 @@ function add(a, b) {
   display.textContent = '';
   display.textContent = sum;
   firstNumberAcquired = true;
+  shouldClearDisplay = true;
 }
 
 function subtract(a, b) {
@@ -22,6 +23,7 @@ function subtract(a, b) {
   display.textContent = '';
   display.textContent = sum;
   firstNumberAcquired = true;
+  shouldClearDisplay = true;
 }
 
 function multiply(a, b) {
@@ -29,6 +31,7 @@ function multiply(a, b) {
   display.textContent = '';
   display.textContent = sum;
   firstNumberAcquired = true;
+  shouldClearDisplay = true;
 }
 
 function divide(a, b) {
@@ -36,6 +39,7 @@ function divide(a, b) {
   display.textContent = '';
   display.textContent = sum;
   firstNumberAcquired = true;
+  shouldClearDisplay = true;
 }
 
 // Variables
@@ -123,4 +127,7 @@ clear.addEventListener('click', function () {
   firstNumber = 0;
   currentOperator = '';
   secondNumber = 0;
+  shouldClearDisplay = false;
+  firstNumberAcquired = false;
+  nest = false;
 });
