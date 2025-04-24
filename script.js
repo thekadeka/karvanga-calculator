@@ -35,6 +35,10 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+  if (b === 0) {
+    display.textContent = 'You cant divide by zero, or atleast it seems so';
+    return false;
+  }
   sum = a / b;
   display.textContent = '';
   display.textContent = sum;
