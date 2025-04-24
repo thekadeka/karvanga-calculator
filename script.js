@@ -84,11 +84,14 @@ function populate(firstNumber, operator, secondNumber) {
   // x.2 If operator clicked add value to the firstNumber that is displayed and value to the operator
   operators.forEach(function (item) {
     item.addEventListener('click', function (e) {
-      if (nest == true) {
-        secondNumber = display.textContent;
-        operate(firstNumber, currentOperator, secondNumber);
-        nest = false;
+      if (display.textContent !== firstNumber) {
+        if (nest == true) {
+          secondNumber = display.textContent;
+          operate(firstNumber, currentOperator, secondNumber);
+          nest = false;
+        }
       }
+
       if (nest == false) {
         currentOperator = e.target.textContent;
         firstNumber = display.textContent;
