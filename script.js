@@ -4,6 +4,10 @@ const numbers = document.querySelectorAll('.number');
 const equals = document.querySelector('#equals');
 let shouldClearDisplay = false;
 let firstNumberAcquired = false;
+let nest = false;
+let firstNumber = 0;
+let currentOperator = '';
+let secondNumber = 0;
 
 // Operation functions
 function add(a, b) {
@@ -35,9 +39,6 @@ function divide(a, b) {
 }
 
 // Variables
-let firstNumber = 0;
-let operator = '';
-let secondNumber = 0;
 
 function operate(firstNumber, operator, secondNumber) {
   let num1 = Number(firstNumber);
@@ -83,22 +84,29 @@ function populate(firstNumber, operator, secondNumber) {
   // x.2 If operator clicked add value to the firstNumber that is displayed and value to the operator
   operators.forEach(function (item) {
     item.addEventListener('click', function (e) {
-      operator = e.target.textContent;
-      firstNumber = display.textContent;
-      console.log(firstNumber);
-      shouldClearDisplay = true;
-      firstNumberAcquired = true;
+      if (nest == true) {
+        secondNumber = display.textContent;
+        operate(firstNumber, currentOperator, secondNumber);
+        nest = false;
+      }
+      if (nest == false) {
+        currentOperator = e.target.textContent;
+        firstNumber = display.textContent;
+        console.log(firstNumber);
+        shouldClearDisplay = true;
+        firstNumberAcquired = true;
+        nest = true;
+      }
     });
-    // x.3  If new number is clicked clear display and add new numbers to the display
-    //BUG: Every time it runs it adds multiple event listeners to the numbers
   });
 
   // x.4 If equal sign is clicked add value that is displayed to the secondNumber and call operate on these variables
   equals.addEventListener('click', function () {
+    nest = false;
     secondNumber = display.textContent;
     console.log(secondNumber);
-    console.log(operator);
-    operate(firstNumber, operator, secondNumber);
+    console.log(currentOperator);
+    operate(firstNumber, currentOperator, secondNumber);
   });
 }
 
@@ -109,7 +117,7 @@ populate();
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', function () {
   display.textContent = '';
-  let firstNumber = 0;
-  let operator = '';
-  let secondNumber = 0;
+  firstNumber = 0;
+  currentOperator = '';
+  secondNumber = 0;
 });
